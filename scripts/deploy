@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var mkdirp = require('mkdirp');
+var path = require('path');
+var each = require('lodash/each');
+var generateUtterances = require('../lib/generateUtterances').generateUtterances;
+var generateSchema = require('../lib/generateSchema').generateSchema;
+var generateCustomSlots = require('../lib/generateCustomSlots').generateCustomSlots;
+var schema = require('../schema');
+
+mkdirp(path.join(__dirname, '../build'));
+mkdirp(path.join(__dirname, '../build/speechAssets'));
+mkdirp(path.join(__dirname, '../build/speechAssets/customSlotTypes'));
+
+var utterances = generateUtterances(schema);
+var utterancesText = utterances.join('\n') + '\n';
+fs.writeFileSync(path.join(__dirname, '../build/speechAssets/SampleUtterances.txt'), utterancesText);
+
+var intent = generateSchema(schema);
+var intentText = JSON.stringify(intent, null, 2);
+fs.writeFileSync(path.join(__dirname, '../build/speechAssets/IntentSchema.json'), intentText);
+
+var slots = generateCustomSlots(schema);
+each(slots, function(words, name) {
+    var slotsText = words.join('\n') + '\n';
+    fs.writeFileSync(path.join(__dirname, '../build/speechAssets/customSlotTypes/', name), slotsText);
+});

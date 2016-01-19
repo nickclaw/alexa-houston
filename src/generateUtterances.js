@@ -7,7 +7,7 @@ export function generateUtterances(schema) {
 
     each(schema.utterances, function(templates, intent) {
         each(templates, function(template) {
-            ret.push(template, schema.slots[intent] || {}, schema.dictionary)
+            ret.push(utterances(template, schema.slots[intent] || {}, schema.dictionary))
         });
     });
 
