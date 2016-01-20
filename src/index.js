@@ -1,4 +1,4 @@
-var Skill = require('./lib/Skill');
+var Skill = require('./Skill');
 
 var app = new Skill();
 

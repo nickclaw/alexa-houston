@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rm -r lib build
+rm -r build node_modules
