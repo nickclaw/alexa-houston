@@ -1,20 +1,19 @@
-var Skill = require('./Skill');
+import { Skill } from './Skill';
 
-var app = new Skill();
+const app = new Skill();
 
-app.on('HOUSTON.ProblemIntent', function(sess, done) {
-
+app.on('launch', function(sess) {
+    sess.say("Testing testing one two three.");
 });
 
-app.on('AMAZON.HelpIntent', function(sess, done) {
-
+app.on('ProblemIntent', function(sess) {
+    sess.say("Okay, stand by, 13. We're looking at it.").end();
 });
 
-module.exports = function(event, context) {
+export function handler(event, context) {
     app.handle(event, context, function(err, sess) {
         if (err) console.log('Intent failed.');
-        else if (sess.rejected) console.log('Intented was rejected.');
-        else if (sess.finished) console.log('Intent finished.');
+        else if (sess._done) console.log('Intent finished.');
         else console.log('Intent did not resolve.');
     });
 }
