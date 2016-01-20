@@ -3,7 +3,7 @@ import { Skill } from './Skill';
 const app = new Skill();
 
 app.on('launch', function(sess) {
-    sess.say("Testing testing one two three.");
+    sess.say("Testing testing one two three.").end();
 });
 
 app.on('ProblemIntent', function(sess) {
