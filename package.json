@@ -4,10 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "./scripts/clean.sh",
+    "build": "./scripts/build.sh"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "alexa",
+    "amazon",
+    "echo",
+    "skill",
+    "skills",
+    "kit"
+  ],
+  "author": {
+    "name": "Nicholas Clawson",
+    "email": "nickclaw@gmail.com",
+    "url": "nickclaw.com"
+  },
   "license": "MIT",
   "dependencies": {
     "async-eventemitter": "^0.2.2",
