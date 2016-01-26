@@ -1,19 +1,14 @@
-import { Skill } from './Skill';
+import { Ability, intent } from 'alexa-ability';
+import handle from 'alexa-ability-lambda-handler';
 
-const app = new Skill();
+const ability = new Ability();
 
-app.on('launch', function(sess) {
-    sess.say("Testing testing one two three.").end();
+ability.on(intent.LAUNCH, function(sess) {
+    sess.say("Testing testing one two three.").send();
 });
 
-app.on('ProblemIntent', function(sess) {
+ability.on('ProblemIntent', function(sess) {
     sess.say("Okay, stand by, 13. We're looking at it.").end();
 });
 
-export function handler(event, context) {
-    app.handle(event, context, function(err, sess) {
-        if (err) console.log('Intent failed.');
-        else if (sess._done) console.log('Intent finished.');
-        else console.log('Intent did not resolve.');
-    });
-}
+export const handler = handle(ability);
