@@ -30,8 +30,8 @@
     "browserify": "^13.0.0"
   },
   "dependencies": {
-    "alexa-ability": "^0.3.5",
-    "alexa-ability-lambda-handler": "^0.2.0",
-    "alexa-ssml": "^0.2.1"
+    "alexa-ability": "^0.5.0",
+    "alexa-ability-lambda-handler": "^0.3.0",
+    "alexa-ssml": "^0.3.1"
   }
 }

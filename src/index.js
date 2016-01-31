@@ -1,7 +1,7 @@
 /** @jsx ssml */
 
 import { Ability, events } from 'alexa-ability';
-import handle from 'alexa-ability-lambda-handler';
+import { handleAbility } from 'alexa-ability-lambda-handler';
 import { ssml } from 'alexa-ssml';
 
 const ability = new Ability();
@@ -15,7 +15,7 @@ ability.on(events.launch, function(req) {
         </speak>
     );
 
-    req.say(response).show("Shuttle launched!");
+    req.say(response).show("Shuttle launched!").end();
 });
 
 ability.on('ProblemIntent', function(req) {
@@ -23,7 +23,7 @@ ability.on('ProblemIntent', function(req) {
 });
 
 ability.on(events.error, function(req) {
-    req.say("We have a problem over here too.");
+    req.say("We have a problem over here too.").end();
 });
 
-export const handler = handle(ability);
+export const handler = handleAbility(ability);
