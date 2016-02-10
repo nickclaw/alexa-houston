@@ -2,6 +2,24 @@
     "intents": [
         {
             "intent": "ProblemIntent"
+        },
+        {
+            "intent": "SpacePeopleIntent"
+        },
+        {
+            "intent": "ISSTimeIntent"
+        },
+        {
+            "intent": "ChooseLocationIntent",
+            "slots": [
+                {
+                    "name": "City",
+                    "type": "AMAZON.US_CITY"
+                }
+            ]
+        },
+        {
+            "intent": "AMAZON.HelpIntent"
         }
     ]
 }

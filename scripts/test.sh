@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd build
+../node_modules/.bin/node-lambda run \
+    --handler index.handler          \
+    --eventFile event.json

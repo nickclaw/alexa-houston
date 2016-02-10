@@ -1,3 +1,6 @@
-lib
 build
 node_modules
+
+.env
+deploy.env
+event.json
