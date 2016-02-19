@@ -5,7 +5,7 @@ export const issTimeIntent = [
 
     // make sure user has set a location
     (req, next) => {
-        if (req.userStore.location) return next();
+        if (req.store.location) return next();
         req.say("We'll need to know your location first.").send();
     },
 
@@ -13,12 +13,12 @@ export const issTimeIntent = [
     (req, next) => {
         const url = 'http://api.open-notify.org/iss-pass.json';
         const query = {
-            lat: req.userStore.location.lat,
-            lon: req.userStore.location.lng,
+            lat: req.store.location.lat,
+            lon: req.store.location.lng,
             passes: 1
         };
 
-        superagent.get(url).query(query).end((err, res) => {
+        const request = superagent.get(url).query(query).end((err, res) => {
             if (err) return next(err);
             const time = get(res, 'body.response[0].risetime', null);
 
@@ -27,5 +27,7 @@ export const issTimeIntent = [
             const minutes = Math.floor((time * 1000 - Date.now()) / 1000 / 60);
             req.say(`The ISS will be above you in ${minutes} minutes`).end();
         });
+
+        request.on('timeout', () => request.abort());
     }
 ]

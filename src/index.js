@@ -4,6 +4,8 @@ import { Ability, events } from 'alexa-ability';
 import { handleAbility } from 'alexa-ability-lambda-handler';
 import { ssml } from 'alexa-ssml';
 import userStore from 'alexa-ability-user-store';
+import { timeout, TimeoutError } from 'alexa-ability-timeout';
+import { context, trackContext } from 'alexa-ability-context';
 import createRedisStore from 'connect-redis';
 
 import { problemIntent } from './handlers/problem-intent'
@@ -15,6 +17,12 @@ import { helpIntent } from './handlers/help-intent';
 const ability = new Ability();
 const RedisStore = createRedisStore(userStore);
 
+//
+// Middleware
+//
+
+ability.use(timeout(5000));
+ability.use(trackContext());
 ability.use(userStore({
     store: new RedisStore({
         host: process.env.REDIS_HOST,
@@ -32,10 +40,20 @@ ability.on(events.end, function(req) {
     req.say('Houston signing off.').end();
 });
 
+ability.on(events.help, helpIntent);
+
 ability.on('ProblemIntent', problemIntent);
 ability.on('SpacePeopleIntent', spacePeopleIntent);
 ability.on('ISSTimeIntent', issTimeIntent);
 ability.on('ChooseLocationIntent', chooseLocationIntent);
-ability.on(events.help, helpIntent);
+
+ability.use(function handleError(err, req, next) {
+    console.log(err);
+    if (err instanceof TimeoutError) {
+        req.say('Sorry, I spaced out there a second. Can you repeat that?').send();
+    } else {
+        req.say('I had some trouble understanding you. Can you say that again?').send();
+    }
+});
 
 export const handler = handleAbility(ability);

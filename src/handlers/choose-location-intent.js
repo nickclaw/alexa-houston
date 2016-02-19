@@ -8,15 +8,17 @@ export function chooseLocationIntent(req, next) {
         address: req.params.City
     };
 
-    superagent.get(url).query(query).end((err, res) => {
+    const request = superagent.get(url).query(query).end((err, res) => {
         if (err) return next(err);
         const location = get(res, 'body.results[0].geometry.location', null);
 
         if (location) {
-            req.userStore.location = location;
+            req.store.location = location;
             req.say('Roger roger. What do you need now?').send();
         } else {
             req.say('fail!').send();
         }
     });
+
+    req.on('timeout', () => request.abort());
 }
