@@ -32,13 +32,13 @@
   },
   "dependencies": {
     "alexa-ability": "^0.11.0",
-    "alexa-ability-context": "^0.2.1",
-    "alexa-ability-lambda-handler": "^0.3.2",
+    "alexa-ability-context": "^0.3.0",
+    "alexa-ability-lambda-handler": "^0.3.3",
     "alexa-ability-timeout": "^0.2.4",
-    "alexa-ability-user-store": "git://github.com/nickclaw/alexa-ability-user-store.git",
-    "alexa-ssml": "^0.3.1",
+    "alexa-ability-stash": "^0.2.1",
+    "alexa-ssml": "^0.3.2",
     "connect-redis": "^3.0.2",
-    "lodash": "^4.1.0",
+    "lodash": "^4.5.1",
     "superagent": "^1.7.2"
   }
 }
