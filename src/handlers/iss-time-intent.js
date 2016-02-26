@@ -5,7 +5,7 @@ export const issTimeIntent = [
 
     // make sure user has set a location
     (req, next) => {
-        if (req.store.location) return next();
+        if (req.stash.location) return next();
         req.say("We'll need to know your location first.").send();
     },
 
@@ -13,8 +13,8 @@ export const issTimeIntent = [
     (req, next) => {
         const url = 'http://api.open-notify.org/iss-pass.json';
         const query = {
-            lat: req.store.location.lat,
-            lon: req.store.location.lng,
+            lat: req.stash.location.lat,
+            lon: req.stash.location.lng,
             passes: 1
         };
 

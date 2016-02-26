@@ -13,7 +13,7 @@ export function chooseLocationIntent(req, next) {
         const location = get(res, 'body.results[0].geometry.location', null);
 
         if (location) {
-            req.store.location = location;
+            req.stash.location = location;
             req.say('Roger roger. What do you need now?').send();
         } else {
             req.say('fail!').send();

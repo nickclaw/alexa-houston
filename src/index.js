@@ -3,7 +3,7 @@
 import { Ability, events } from 'alexa-ability';
 import { handleAbility } from 'alexa-ability-lambda-handler';
 import { ssml } from 'alexa-ssml';
-import userStore from 'alexa-ability-user-store';
+import userStore from 'alexa-ability-stash';
 import { timeout, TimeoutError } from 'alexa-ability-timeout';
 import { context, trackContext } from 'alexa-ability-context';
 import createRedisStore from 'connect-redis';
